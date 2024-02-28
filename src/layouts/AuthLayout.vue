@@ -25,7 +25,6 @@ onMounted(() => {
       >
         <router-link
           :to="{ name: 'home' }"
-          href="https://flowbite.com/"
           class="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img src="@/assets/logo.svg" width="24" />
