@@ -10,14 +10,19 @@ export const useTinyUrlsStore = defineStore('tiny-urls', () => {
 
   async function init() {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/v1/tiny-urls', {
-        method: 'GET',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-        },
-      })
+      const resp = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tiny-urls`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem('token')
+            )}`,
+          },
+        }
+      )
       const respData = await resp.json()
       tinyUrls.value = respData.data
     } catch (err) {
@@ -27,15 +32,20 @@ export const useTinyUrlsStore = defineStore('tiny-urls', () => {
 
   async function create(formData) {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/v1/tiny-urls', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-        },
-        body: JSON.stringify(formData),
-      })
+      const resp = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/tiny-urls`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem('token')
+            )}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      )
       const respData = await resp.json()
       if (!resp.ok) {
         errors.create = respData.errors || respData.message
@@ -57,14 +67,19 @@ export const useTinyUrlsStore = defineStore('tiny-urls', () => {
       return
 
     try {
-      const resp = await fetch(`http://127.0.0.1:8000/api/v1/tiny-urls/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-        },
-      })
+      const resp = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/tiny-urls/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${JSON.parse(
+              localStorage.getItem('token')
+            )}`,
+          },
+        }
+      )
       await resp.json()
       tinyUrls.value = tinyUrls.value.filter((tinyUrl) => tinyUrl.id !== id)
     } catch (err) {

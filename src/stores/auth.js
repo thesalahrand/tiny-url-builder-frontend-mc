@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(formData) {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/v1/login', {
+      const resp = await fetch(`${import.meta.env.VITE_API_BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -41,14 +41,17 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function register(formData) {
     try {
-      const resp = await fetch('http://127.0.0.1:8000/api/v1/register', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+      const resp = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      )
       const respData = await resp.json()
       if (!resp.ok) {
         console.log(respData.errors)
