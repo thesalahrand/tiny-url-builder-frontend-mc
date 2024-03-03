@@ -1,8 +1,0 @@
-@import './base.css';
-
-*,
-*::before,
-*::after {
-  font-family: 'Poppins', sans-serif;
-  box-sizing: border-box;
-}
