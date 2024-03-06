@@ -15,8 +15,18 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(formData) {
     try {
+      await fetch(
+        `${
+          import.meta.env.VITE_API_BASE_URL.split('/api/v1')[0]
+        }/sanctum/csrf-cookie`,
+        {
+          credentials: 'include',
+        }
+      )
+
       const resp = await fetch(`${import.meta.env.VITE_API_BASE_URL}/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-type': 'application/json',
           Accept: 'application/json',
@@ -41,10 +51,20 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function register(formData) {
     try {
+      await fetch(
+        `${
+          import.meta.env.VITE_API_BASE_URL.split('/api/v1')[0]
+        }/sanctum/csrf-cookie`,
+        {
+          credentials: 'include',
+        }
+      )
+
       const resp = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/register`,
         {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-type': 'application/json',
             Accept: 'application/json',

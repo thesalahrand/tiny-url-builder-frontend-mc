@@ -39,7 +39,9 @@ onMounted(() => {
       <InputError
         class="mt-2"
         :message="
-          authStore?.errors?.login?.email || authStore?.errors?.login?.[0]
+          authStore?.errors?.login?.email ||
+          authStore?.errors?.login?.email?.[0] ||
+          authStore?.errors?.login
         "
       />
     </div>
